@@ -10,26 +10,8 @@ struct Wheel
 };
 
 /* pin1, pin 2, analog pin, value 1, value 2, speed (255) */
-Wheel left = {12, 13, 11, 0, 1, 180},
-      right = {4, 5, 3, 0, 1, 180};
-
-void setup()
-{
-  registerWheel(&left);
-    registerWheel(&right);
-}
-
-void loop()
-{
-  setSpeedByPercent(&left, 75);
-    setSpeedByPercent(&right, 75);
-
-    wheelGoUp(&left);
-    wheelGoUp(&right);
-    delay(3000);
-    wheelGoDown(&left);
-    wheelGoDown(&right);
-}
+Wheel left = {12, 13, 11, 0, 1, 100},
+      right = {4, 5, 3, 0, 1, 100}; // mark as black
 
 /* one wheel functionality */
 void registerWheel(Wheel *a);
@@ -40,6 +22,26 @@ void stopWheel(Wheel *w);
 void reverseWheel(Wheel *a);
 void setSpeedByPercent(Wheel *w, byte speed);
 void setSpeedByPWN(Wheel *w, byte speed);
+
+
+void setup()
+{
+    registerWheel(&left);
+    registerWheel(&right);
+}
+
+void loop()
+{
+    wheelGoUp(&left);
+    wheelGoUp(&right);
+    delay(3000);
+    stopWheel(&left);
+    stopWheel(&right);
+    delay(3000);
+    wheelGoDown(&left);
+    wheelGoDown(&right);
+    delay(3000);
+}
 
 void registerWheel(Wheel *a)
 {
