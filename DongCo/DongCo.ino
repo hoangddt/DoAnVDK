@@ -22,8 +22,8 @@ struct Wheel
 };
 
 /* pin1, pin 2, analog pin, value 1, value 2, speed (255) */
-Wheel left = {12, 13, 11, 0, 1, 100},
-      right = {4, 5, 3, 0, 1, 100}; // mark as black
+Wheel left = {12, 13, 11, 0, 1, 130},
+      right = {4, 5, 3, 0, 1, 130}; // mark as black
 
 /* one wheel functionality */
 void registerWheel(Wheel *a);
@@ -69,13 +69,13 @@ void loop()
 //  Serial.println(gz);
   //
 
-  if (gy > 113)
+  if (gy < 50)
   {
     wheelGoUp(&left);
     wheelGoUp(&right);
    // delay(100);
   }
-  else if (gy < 49)
+  else if (gy > 115)
   {
     wheelGoDown(&left);
     wheelGoDown(&right);
