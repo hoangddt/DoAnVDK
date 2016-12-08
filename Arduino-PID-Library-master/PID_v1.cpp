@@ -12,6 +12,7 @@
 #endif
 
 #include <PID_v1.h>
+#include <math.h>
 
 /*Constructor (...)*********************************************************
  *    The parameters specified here are those for for which we can't set up 
@@ -33,6 +34,7 @@ PID::PID(double* Input, double* Output, double* Setpoint,
 
     PID::SetControllerDirection(ControllerDirection);
     PID::SetTunings(Kp, Ki, Kd);
+
     lastTime = millis()-SampleTime;				
 }
  
@@ -63,7 +65,7 @@ bool PID::Compute()
       
 	  if(output > outMax) output = outMax;
       else if(output < outMin) output = outMin;
-	  *myOutput = output;
+	  *myOutput = output*tan(fabs(*myInput - *mySetpoint)*3.14/180);
 	  
       /*Remember some variables for next time*/
       lastInput = input;

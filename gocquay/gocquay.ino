@@ -4,9 +4,9 @@
 */
 #include <PID_v1.h>
 PID *pid;
-double Kp = 300;
-double Kd = 0.13;
-double Ki = 30;
+double Kp = 10000;
+double Kd = 100;
+double Ki = 1000;
 double Output;
 double SetPoint;
 byte check_Pid_Created = 0;
@@ -173,6 +173,7 @@ void loop()
   SetPoint = Y_ondinh_TB;
   if (!check_Pid_Created) {
     pid = new PID((double*)&angle_y, &Output, &SetPoint, Kp, Ki, Kd, DIRECT);
+    pid->SetSampleTime(10);
     check_Pid_Created = 1;
   }
   /*
